@@ -36,9 +36,9 @@ RCT_EXPORT_METHOD(mail:(NSDictionary *)options
             NSString *subject = [RCTConvert NSString:options[@"subject"]];
             [mail setSubject:subject];
         }
-        
+
         bool *isHTML = NO;
-        
+
         if (options[@"isHTML"]){
             isHTML = YES;
         }
@@ -57,7 +57,7 @@ RCT_EXPORT_METHOD(mail:(NSDictionary *)options
             NSArray *ccRecipients = [RCTConvert NSArray:options[@"ccRecipients"]];
             [mail setCcRecipients:ccRecipients];
         }
-        
+
         if (options[@"bccRecipients"]){
             NSArray *bccRecipients = [RCTConvert NSArray:options[@"bccRecipients"]];
             [mail setBccRecipients:bccRecipients];
@@ -78,7 +78,7 @@ RCT_EXPORT_METHOD(mail:(NSDictionary *)options
 
             // Determine the MIME type
             NSString *mimeType;
-            
+
             /*
              * Add additional mime types and PR if necessary. Find the list
              * of supported formats at http://www.iana.org/assignments/media-types/media-types.xhtml
@@ -105,6 +105,8 @@ RCT_EXPORT_METHOD(mail:(NSDictionary *)options
                 mimeType = @"application/zip";
             } else if ([attachmentType isEqualToString:@"text"]) {
                 mimeType = @"text/*";
+            } else if ([attachmentType isEqualToString:@"calendar"]) {
+                mimeType = @"text/calendar";
             }
 
             // Add attachment
